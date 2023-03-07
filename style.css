@@ -5,6 +5,20 @@
 body{
     background-color: aqua;
 }
-h1{
-    text-align: center;
+.name{
+    border: none;
+}
+input{
+    padding:0.5rem;
+}
+.submit_btn{
+    border: none;
+    font-family: sans-serif;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
