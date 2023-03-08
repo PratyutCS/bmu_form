@@ -16,7 +16,6 @@ input{
 }
 .submit_btn{
     border: none;
-    font-family: 'poppins';
     background-color: white;
     color:black;
     transition: 0.75s;
