@@ -1,6 +1,7 @@
 let Express = require('express')
 let path = require('path')
 let bodyparser=require('body-parser');
+let fs=require('fs');
 
 let app = new Express()
 
@@ -39,6 +40,13 @@ app.post("/pdf", async(req, res) => {
     const marriage= req.body.marriage;
     const correspondence=req.body.correspondence;
     const permanent=req.body.permanent;
+    fs.writeFile("./test.txt", name, (err) => {
+        if (err) {
+            console.error(err);
+        return;
+          }
+        });
+        console.log("Data has been Written");
     res.render('pdf',{post:post,
                       school:school,
                       name:name,
