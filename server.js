@@ -6,6 +6,11 @@ let app = new Express()
 
 app.use(bodyparser.urlencoded({extended: true}));
 
+
+app.use(Express.static(__dirname + '/public/css'));
+app.use(Express.static(__dirname + '/public/images'));
+
+
 let htmlfolder = path.join(__dirname, "public/html");
 let cssfolder = path.join(__dirname, "public/css");
 
