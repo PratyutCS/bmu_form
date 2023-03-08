@@ -3,6 +3,8 @@ let path = require('path')
 let bodyparser=require('body-parser');
 let fs=require('fs');
 
+let docx = require("docx");
+
 let app = new Express()
 
 app.use(bodyparser.urlencoded({extended: true}));
@@ -40,18 +42,23 @@ app.post("/pdf", async(req, res) => {
     const marriage= req.body.marriage;
     const correspondence=req.body.correspondence;
     const permanent=req.body.permanent;
-    fs.writeFile("./test.txt", name, (err) => {
-        if (err) {
-            console.error(err);
-        return;
-          }
-        });
-        console.log("Data has been Written");
+    let gender1;
+    let marriage1;
+    if(gender==1)
+        gender1="Male";
+    else   
+        gender1="Female";
+    if(marriage==1)
+        marriage1="Single";
+    else
+        marriage1="Married";
+    generateWordDocument(post,school,name,gender1,marriage1,correspondence,permanent);
+    console.log("Data has been Written");
     res.render('pdf',{post:post,
                       school:school,
                       name:name,
-                      gender:gender,
-                      marriage:marriage,
+                      gender:gender1,
+                      marriage:marriage1,
                       correspondence:correspondence,
                       permanent:permanent});
 })
@@ -65,3 +72,54 @@ const PORT= process.env.PORT || 80
 app.listen(PORT, () => {
     console.log("Server is running at lolz "+ PORT);
 })
+
+function generateWordDocument(post,school,name,gender,marriage,correspondence,permanent){
+    const doc = new docx.Document({
+        sections: [
+            {
+                children: [
+                    new docx.Paragraph({
+                        children: [
+                            new docx.TextRun("Post: "+post),
+                        ],
+                    }),
+                    new docx.Paragraph({
+                        children: [
+                            new docx.TextRun("School: "+school),
+                        ],
+                    }),
+                    new docx.Paragraph({
+                        children: [
+                            new docx.TextRun("Name: "+name),
+                        ],
+                    }),
+                    new docx.Paragraph({
+                        children: [
+                            new docx.TextRun("Gender: "+gender),
+                        ],
+                    }),
+                    new docx.Paragraph({
+                        children: [
+                            new docx.TextRun("Marital Status: "+marriage),
+                        ],
+                    }),
+                    new docx.Paragraph({
+                        children: [
+                            new docx.TextRun("Correspondence Address: "+correspondence),
+                        ],
+                    }),
+                    new docx.Paragraph({
+                        children: [
+                            new docx.TextRun("Permanent Address: "+permanent),
+                        ],
+                    }),
+                ],
+            },
+        ],
+    });
+    
+    // Used to export the file into a .docx file
+    docx.Packer.toBuffer(doc).then((buffer) => {
+        fs.writeFileSync("My Document.docx", buffer);
+    });
+}
