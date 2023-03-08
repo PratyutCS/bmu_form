@@ -28,8 +28,10 @@ app.get("/style", (req, res) => {
 app.post("/pdf", async(req, res) => {
     const post= req.body.posted;
     const school= req.body.school;
+    const name = (req.body.fname).trim()+" "+(req.body.mname).trim()+" "+(req.body.lname).trim();
     res.render('pdf',{post:post,
-                      school:school});
+                      school:school,
+                      name:name});
 })
 
 app.get("*", (req, res) => {
