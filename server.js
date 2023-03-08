@@ -29,9 +29,17 @@ app.post("/pdf", async(req, res) => {
     const post= req.body.posted;
     const school= req.body.school;
     const name = (req.body.fname).trim()+" "+(req.body.mname).trim()+" "+(req.body.lname).trim();
+    const gender= req.body.gender;
+    const marriage= req.body.marriage;
+    const correspondence=req.body.correspondence;
+    const permanent=req.body.permanent;
     res.render('pdf',{post:post,
                       school:school,
-                      name:name});
+                      name:name,
+                      gender:gender,
+                      marriage:marriage,
+                      correspondence:correspondence,
+                      permanent:permanent});
 })
 
 app.get("*", (req, res) => {

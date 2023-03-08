@@ -45,3 +45,21 @@ body{
 .heading{
     text-align: center;
 }
+.gender{
+    margin-top:0.5rem;
+    padding:0.5rem;
+    border-radius: 0.5rem;
+    border:none;
+}
+.marriage{
+    margin-top:0.5rem;
+    padding:0.5rem;
+    border-radius: 0.5rem;
+    border:none;
+}
+.correspondence{
+    width:35rem;
+}
+.permanent{
+    width:35rem;
+}
