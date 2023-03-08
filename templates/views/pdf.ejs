@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMU Faculty Recruitment Application Form</title>
+    <script defer src="./fill.js"></script>
 </head>
 <body>
     <%-include("../partials/header") %>
@@ -15,12 +16,20 @@
     <br>
     <h1>NAME IN FULL = <%=name%></h1>
     <br>
-    <h1>GENDER = <%=gender%></h1>
+    <%if (gender==1) {%>
+        <h1>GENDER = Male</h1>
+    <%} else {%>
+        <h1>GENDER = Female</h1>
+    <%}%>
     <br>
-    <h1>MARRIAGE = <%marriage%></h1>
+    <%if (marriage==1) {%>
+        <h1>MARITIAL STATUS = Single</h1>
+    <%} else {%>
+        <h1>MARITIAL STATUS = Married</h1>
+    <%}%>
     <br>
-    <h1>CORRESPONDENCE = <%correspondence%></h1>
+    <h1>CORRESPONDENCE ADDRESS = <%=correspondence%></h1>
     <br>
-    <h1>PERMANENT = <%permanent%></h1>
+    <h1>PERMANENT ADDRESS = <%=permanent%></h1>
 </body>
 </html>

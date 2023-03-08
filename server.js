@@ -9,10 +9,12 @@ app.use(bodyparser.urlencoded({extended: true}));
 
 app.use(Express.static(__dirname + '/public/css'));
 app.use(Express.static(__dirname + '/public/images'));
+app.use(Express.static(__dirname + '/public/js'));
 
 
 let htmlfolder = path.join(__dirname, "public/html");
 let cssfolder = path.join(__dirname, "public/css");
+let jsfolder = path.join(__dirname, "public/js");
 
 app.set('view engine','ejs');
 app.set("views",path.join(__dirname, "./templates/views"))
@@ -23,6 +25,10 @@ app.get("/", (req, res) => {
 
 app.get("/style", (req, res) => {
     res.sendFile(path.join(cssfolder, "style.css"));
+})
+
+app.get("/js", (req, res) => {
+    res.sendFile(path.join(cssfolder, "fill.css"));
 })
 
 app.post("/pdf", async(req, res) => {

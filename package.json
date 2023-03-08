@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/PratyutCS/bmu_form/issues"
   },
-  "homepage": "https://github.com/PratyutCS/bmu_form#readme"
+  "homepage": "https://github.com/PratyutCS/bmu_form#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "node": "^19.6.1",
+    "nodemon": "^2.0.21",
+    "path": "^0.12.7",
+    "require": "^0.4.4"
+  }
 }
