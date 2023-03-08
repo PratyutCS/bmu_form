@@ -9,11 +9,21 @@ body{
     border: none;
 }
 input{
+    margin-top:0.5rem;
     padding:0.5rem;
+    border-radius: 0.5rem;
+    border:none;
 }
 .submit_btn{
     border: none;
-    font-family: sans-serif;
+    font-family: 'poppins';
+    background-color: white;
+    color:black;
+    transition: 0.75s;
+}
+.submit_btn:hover{
+    background-color: black;
+    color:white;
 }
 body{
     height: 100vh;
@@ -21,4 +31,18 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.entry{
+    margin-top:0.5rem;   
+}
+.astriek{
+    color: red;
+}
+.note{
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+.heading{
+    text-align: center;
 }
