@@ -1,4 +1,4 @@
-const fs = require('fs');
+var fs = require('fs');
 
 fs.writeFile("./test.txt", post, (err) => {
 if (err) {
