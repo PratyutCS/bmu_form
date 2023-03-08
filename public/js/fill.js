@@ -1,5 +1,4 @@
-let fs = require('fs');
-let text = "HELLO I AM WRITTEN TO THE FILE";
+const fs = require('fs');
 
 fs.writeFile("./test.txt", post, (err) => {
 if (err) {
