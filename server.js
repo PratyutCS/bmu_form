@@ -65,7 +65,6 @@ app.post("/pdf", async(req, res) => {
 
     
     generateWordDocument(res,post,school,name,gender1,marriage1,correspondence,permanent);
-    // render(res,post,school,name,gender1,marriage1,correspondence,permanent);
 })
 
 app.get("*", (req, res) => {
@@ -151,15 +150,7 @@ function convertPdftoDocx(res,name){
         pdfRender(res,name);
         });
 }
-function render(res,post,school,name,gender1,marriage1,correspondence,permanent){
-    res.render('pdf',{post:post,
-        school:school,
-        name:name,
-        gender:gender1,
-        marriage:marriage1,
-        correspondence:correspondence,
-        permanent:permanent});
-}
+
 function pdfRender(res,name){
     pdfName=name+".pdf";
     res.sendFile(path.join(pdffolder,pdfName));
