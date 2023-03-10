@@ -3,6 +3,7 @@ let path = require('path')
 let bodyparser=require('body-parser');
 let fs=require('fs');
 let docx = require("docx");
+var docxConverter = require('docx-pdf');
 
 let app = new Express()
 
@@ -36,30 +37,33 @@ app.get("/js", (req, res) => {
 app.post("/pdf", async(req, res) => {
     const post= req.body.posted;
     const school= req.body.school;
-    const name = (req.body.fname).trim()+" "+(req.body.mname).trim()+" "+(req.body.lname).trim();
+    let name="";
+
+    if((req.body.mname).trim()==="")
+        name = (req.body.fname).trim()+" "+(req.body.lname).trim();
+    else
+        name = (req.body.fname).trim()+" "+(req.body.mname).trim()+" "+(req.body.lname).trim();
+
     const gender= req.body.gender;
     const marriage= req.body.marriage;
     const correspondence=req.body.correspondence;
     const permanent=req.body.permanent;
+
     let gender1;
     let marriage1;
     if(gender==1)
         gender1="Male";
     else   
         gender1="Female";
+
     if(marriage==1)
         marriage1="Single";
     else
         marriage1="Married";
+
+    
     generateWordDocument(post,school,name,gender1,marriage1,correspondence,permanent);
-    console.log("Data has been Written");
-    res.render('pdf',{post:post,
-                      school:school,
-                      name:name,
-                      gender:gender1,
-                      marriage:marriage1,
-                      correspondence:correspondence,
-                      permanent:permanent});
+    render(res,post,school,name,gender1,marriage1,correspondence,permanent);
 })
 
 app.get("*", (req, res) => {
@@ -118,7 +122,38 @@ function generateWordDocument(post,school,name,gender,marriage,correspondence,pe
     });
     
     // Used to export the file into a .docx file
+    let fileName=name+".docx";
+    let filePath="/word/"+fileName;
+    let initialPath = path.join(__dirname,filePath);
+    console.log(initialPath);
     docx.Packer.toBuffer(doc).then((buffer) => {
-        fs.writeFileSync("My Document.docx", buffer);
+        fs.writeFileSync(initialPath, buffer);
+        console.log("Data has been Written");
+        fs.readFileSync(initialPath);
+        console.log("Data has been Read");
+        convertPdftoDocx(name);
     });
+}
+
+function convertPdftoDocx(name){
+    let fileNameDoc="/word/"+name+".docx";
+    let fileNamePdf="/pdf/"+name+".pdf";
+    let initialPath = path.join(__dirname,fileNameDoc);
+    let uploadPath = path.join(__dirname,fileNamePdf);
+
+    docxConverter(initialPath,uploadPath,function(err,result){
+        if(err){
+          console.log("FOUND A VERY BIG ERROR : "+err);
+        }
+        console.log('result : '+result);
+        });
+}
+function render(res,post,school,name,gender1,marriage1,correspondence,permanent){
+    res.render('pdf',{post:post,
+        school:school,
+        name:name,
+        gender:gender1,
+        marriage:marriage1,
+        correspondence:correspondence,
+        permanent:permanent});
 }
