@@ -12,17 +12,12 @@ app.use(bodyparser.urlencoded({extended: true}));
 
 app.use(Express.static(__dirname + '/public/css'));
 app.use(Express.static(__dirname + '/public/images'));
-app.use(Express.static(__dirname + '/public/js'));
 app.use(Express.static(__dirname + '/pdf'));
 
 
 let htmlfolder = path.join(__dirname, "/public/html");
 let cssfolder = path.join(__dirname, "/public/css");
-let jsfolder = path.join(__dirname, "/public/js");
 let pdffolder = path.join(__dirname, "/pdf");
-
-app.set('view engine','ejs');
-app.set("views",path.join(__dirname, "./templates/views"))
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(htmlfolder, "index.html"));
@@ -30,10 +25,6 @@ app.get("/", (req, res) => {
 
 app.get("/style", (req, res) => {
     res.sendFile(path.join(cssfolder, "style.css"));
-})
-
-app.get("/js", (req, res) => {
-    res.sendFile(path.join(jsfolder, "fill.css"));
 })
 
 app.post("/pdf", async(req, res) => {
@@ -122,7 +113,6 @@ function generateWordDocument(res,post,school,name,gender,marriage,correspondenc
         ],
     });
     
-    // Used to export the file into a .docx file
     let fileName=name+".docx";
     let filePath="/word/"+fileName;
     let initialPath = path.join(__dirname,filePath);
